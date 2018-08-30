@@ -1,19 +1,22 @@
 import React from "react";
+import CardLabel from "./CardLabel";
 
-const GameCard = () => (
+const GameCard = ({game}) => {
+  return(
   <div className="ui card">
     <div className="image">
-      <span className="ui green ribbon label">$32.99</span>
-      <img src="https://content.halocdn.com/media/Default/games/halo-3/Page/game_overview_thumbnail_halo3-825be4767fb34192af8d5529e444a97e.jpg" alt="Halo"/>
+      <CardLabel label={game.label}/>
+      <img src={game.img} alt="Halo"/>
     </div>
     <div className="content">
-      <a href="#" className="header">Halo</a>
+      <a href="/" className="header">{game.name}</a>
       <div className="meta">
-      <i className="icon users" /> 2-4&nbsp;
-      <i className="icon wait" /> 60min
+      <i className="icon users" />{game.players}&nbsp;
+      <i className="icon wait" /> {game.duration}
       </div>
     </div>
   </div>
-)
+  )
+}
 
 export default GameCard;
