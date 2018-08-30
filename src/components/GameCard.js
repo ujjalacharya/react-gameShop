@@ -18,7 +18,7 @@ const GameCard = ({ game, handleFeaturedClick }) => {
         </div>
         <div className="content">
           <a href="/" className="header">
-            {game.name}
+            {game.title}
           </a>
           <div className="meta">
             <i className="icon users" />
