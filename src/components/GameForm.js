@@ -24,11 +24,12 @@ class GameForm extends React.Component {
   };
 
   handleChange = e => {
-    //Changing to number if the type of input is number
-    let value =
-      e.target.type === "number" ? parseInt(e.target.value) : e.target.value;
-    this.setState({ [e.target.name]: value });
+    this.setState({ [e.target.name]: e.target.value });
   };
+
+  handleNumberChange = e =>{
+    this.setState({[e.target.name]: parseInt(e.target.value)})
+  }
 
   handleCheckboxChange = e => {
     this.setState({ [e.target.name]: e.target.checked });
@@ -78,7 +79,7 @@ class GameForm extends React.Component {
           <div className="field">
             <label>Price(in cents)</label>
             <input
-              onChange={this.handleChange}
+              onChange={this.handleNumberChange}
               type="number"
               name="price"
               value={this.state.price}
@@ -89,7 +90,7 @@ class GameForm extends React.Component {
           <div className="field">
             <label>Duration(in mins)</label>
             <input
-              onChange={this.handleChange}
+              onChange={this.handleNumberChange}
               type="number"
               name="duration"
               value={this.state.duration}
@@ -147,6 +148,19 @@ class GameForm extends React.Component {
               <label htmlFor={`gen-${gen._id}`}>{gen.name}</label>
             </div>
           ))}
+        </div>
+
+        <div className="field">
+          <label htmlFor="publisher">Publishers</label>
+          <select
+            name= "publisher"
+            value={this.state.publisher}
+            onChange={this.handleNumberChange}
+          >
+          {this.props.publishers.map(publisher =>(
+            <option value ={publisher._id} key={publisher._id}>{publisher.name}</option>
+          ))}
+          </select>
         </div>
 
         <button className="ui button" type="submit">
