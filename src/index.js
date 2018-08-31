@@ -4,6 +4,8 @@ import _ from "lodash";
 import "semantic-ui-css/semantic.min.css";
 import GameList from "./components/GameList";
 import GameForm from "./components/GameForm";
+import "./index.css";
+import Navbar from "./components/Navbar";
 
 const publishers = [
   { _id: 1, name: "EA Sports" },
@@ -49,7 +51,8 @@ const games = [
 
 class App extends React.Component {
   state = {
-    games: []
+    games: [],
+    isFormActive: false
   };
 
   componentDidMount() {
@@ -72,17 +75,30 @@ class App extends React.Component {
     });
   };
 
+  handleOpenForm = () =>{
+    this.setState({isFormActive: true})
+  }
+
+  handleCloseForm = () =>{
+    this.setState({isFormActive: false})
+  }
 
   render() {
+    let gameCardSize = this.state.isFormActive ? 'ten' : 'twelve';
     return (
-      <div style={{ margin: "10px" }}>
-        <GameForm 
-          publishers={publishers}        
-        />
-        <GameList
-          handleFeaturedClick={this.handleFeaturedClick}
-          games={this.state.games}
-        />
+      <div id="index">
+        <Navbar handleOpenForm={this.handleOpenForm}/>
+        <div class="ui grid">
+          {this.state.isFormActive && <div class="six wide column">
+            <GameForm publishers={publishers} handleCloseForm={this.handleCloseForm}/>
+          </div>}
+          <div class = {`${gameCardSize} wide column`}>
+            <GameList
+              handleFeaturedClick={this.handleFeaturedClick}
+              games={this.state.games}
+            />
+          </div>
+        </div>
       </div>
     );
   }

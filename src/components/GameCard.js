@@ -6,7 +6,7 @@ import Overdrive from "react-overdrive";
 const GameCard = ({ game, handleFeaturedClick }) => {
   return (
     <Overdrive id={String(game.id)}>
-      <div className="ui card" style={{margin: '10px'}}>
+      <div className="ui card" id="card">
         <div className="image">
           <CardLabel label={game.label} />
           <Featured

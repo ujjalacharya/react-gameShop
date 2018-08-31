@@ -60,6 +60,7 @@ class GameForm extends React.Component {
 
           <div className="four wide column">
           <ReactImageFallback 
+            id="thumbnail"
             src={this.state.thumbnail}
             fallbackImage="http://via.placeholder.com/250x250"
             alt="Thumbnail"
@@ -135,10 +136,16 @@ class GameForm extends React.Component {
             ))}
           </select>
         </div>
-
-        <button className="ui button" type="submit">
+          
+        <div className="ui large buttons">
+        <button className="ui button primary" type="submit">
           Submit
         </button>
+        <div class="or" />
+        <button onClick={this.props.handleCloseForm} className="ui button" type="submit">
+          Cancel
+        </button>
+        </div>
       </form>
     );
   }
