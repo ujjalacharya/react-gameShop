@@ -1,15 +1,5 @@
 import React from "react";
-
-const tags = [
-  { _id: 1, name: "dice" },
-  { _id: 2, name: "economic" },
-  { _id: 3, name: "family" }
-];
-const genre = [
-  { _id: 1, name: "arcade" },
-  { _id: 2, name: "multiplayer" },
-  { _id: 3, name: "abstract" }
-];
+import ReactImageFallback from 'react-image-fallback';
 
 class GameForm extends React.Component {
   state = {
@@ -19,30 +9,20 @@ class GameForm extends React.Component {
     duration: "",
     players: "",
     featured: false,
-    tags: [],
-    genre: 1
+    thumbnail: ""
   };
 
   handleChange = e => {
+    console.log(e.target)
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleNumberChange = e =>{
-    this.setState({[e.target.name]: parseInt(e.target.value)})
-  }
+  handleNumberChange = e => {
+    this.setState({ [e.target.name]: parseInt(e.target.value) });
+  };
 
   handleCheckboxChange = e => {
     this.setState({ [e.target.name]: e.target.checked });
-  };
-
-  toggleTag = tag => () => {
-    this.state.tags.includes(tag._id)
-      ? this.setState({ tags: this.state.tags.filter(id => id !== tag._id) })
-      : this.setState({ tags: [...this.state.tags, tag._id] });
-  };
-
-  handleRadio = genre => () => {
-    this.setState({ genre: genre._id });
   };
 
   handleSubmit = e => {
@@ -53,26 +33,47 @@ class GameForm extends React.Component {
   render() {
     return (
       <form className="ui form" onSubmit={this.handleSubmit}>
-        <div className="field">
-          <label>Title</label>
-          <input
-            onChange={this.handleChange}
-            type="text"
-            name="title"
-            value={this.state.title}
-            placeholder="Title..."
+        <div className="ui grid">
+          <div className="twelve wide column">
+            <div className="field">
+              <label>Title</label>
+              <input
+                onChange={this.handleChange}
+                type="text"
+                name="title"
+                value={this.state.title}
+                placeholder="Title..."
+              />
+            </div>
+
+            <div className="field">
+              <label>Description</label>
+              <textarea
+                onChange={this.handleChange}
+                type="text"
+                name="description"
+                value={this.state.description}
+                placeholder="Description..."
+              />
+            </div>
+          </div>
+
+          <div className="four wide column">
+          <ReactImageFallback 
+            src={this.state.thumbnail}
+            fallbackImage="http://via.placeholder.com/250x250"
+            alt="Thumbnail"
+            className="ui image"
           />
+          </div>
         </div>
 
         <div className="field">
-          <label>Description</label>
-          <textarea
-            onChange={this.handleChange}
-            type="text"
-            name="description"
-            value={this.state.description}
-            placeholder="Description..."
-          />
+        <label htmlFor="thumbnail">Image URL</label>
+          <input
+          name="thumbnail"
+          type="text"
+          onChange={this.handleChange} />
         </div>
 
         <div className="three fields">
@@ -121,45 +122,17 @@ class GameForm extends React.Component {
         </div>
 
         <div className="field">
-          <label htmlFor="tags">Tags</label>
-          {tags.map(tag => (
-            <div key={tag._id} className="inline field">
-              <input
-                id={`tag=${tag._id}`}
-                onChange={this.toggleTag(tag)}
-                checked={this.state.tags.includes(tag._id)}
-                type="checkbox"
-              />
-              <label htmlFor={`tag-${tag._id}`}>{tag.name}</label>
-            </div>
-          ))}
-        </div>
-
-        <div className="field">
-          <label htmlFor="tags">Genre</label>
-          {genre.map(gen => (
-            <div key={gen._id} className="inline field">
-                <input
-                  id={`gen-${gen._id}`}
-                  type="radio"
-                  checked={this.state.genre === gen._id}
-                  onChange={this.handleRadio(gen)}
-                />
-              <label htmlFor={`gen-${gen._id}`}>{gen.name}</label>
-            </div>
-          ))}
-        </div>
-
-        <div className="field">
           <label htmlFor="publisher">Publishers</label>
           <select
-            name= "publisher"
+            name="publisher"
             value={this.state.publisher}
             onChange={this.handleNumberChange}
           >
-          {this.props.publishers.map(publisher =>(
-            <option value ={publisher._id} key={publisher._id}>{publisher.name}</option>
-          ))}
+            {this.props.publishers.map(publisher => (
+              <option value={publisher._id} key={publisher._id}>
+                {publisher.name}
+              </option>
+            ))}
           </select>
         </div>
 

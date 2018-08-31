@@ -6,6 +6,7 @@
     "lodash": "^4.17.10",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-image-fallback": "^8.0.0",
     "react-overdrive": "^0.0.10",
     "react-scripts": "1.1.5",
     "semantic-ui-css": "^2.3.3"
