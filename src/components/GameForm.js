@@ -1,9 +1,14 @@
 import React from "react";
 
 const tags = [
-  {_id: 1, name: "dice"},
-  {_id: 2, name: "economic"},
-  {_id: 3, name: "family"}
+  { _id: 1, name: "dice" },
+  { _id: 2, name: "economic" },
+  { _id: 3, name: "family" }
+];
+const genre = [
+  { _id: 1, name: "arcade" },
+  { _id: 2, name: "multiplayer" },
+  { _id: 3, name: "abstract" }
 ];
 
 class GameForm extends React.Component {
@@ -14,7 +19,8 @@ class GameForm extends React.Component {
     duration: "",
     players: "",
     featured: false,
-    tags: []
+    tags: [],
+    genre: 1
   };
 
   handleChange = e => {
@@ -28,10 +34,15 @@ class GameForm extends React.Component {
     this.setState({ [e.target.name]: e.target.checked });
   };
 
-  toggleTag = tag => ()=>{
-    this.state.tags.includes(tag._id) ? this.setState({tags: this.state.tags.filter(id=> id !== tag._id)}):
-    this.setState({tags: [...this.state.tags, tag._id]})
-  }
+  toggleTag = tag => () => {
+    this.state.tags.includes(tag._id)
+      ? this.setState({ tags: this.state.tags.filter(id => id !== tag._id) })
+      : this.setState({ tags: [...this.state.tags, tag._id] });
+  };
+
+  handleRadio = genre => () => {
+    this.setState({ genre: genre._id });
+  };
 
   handleSubmit = e => {
     e.preventDefault();
@@ -122,6 +133,22 @@ class GameForm extends React.Component {
             </div>
           ))}
         </div>
+
+        <div className="field">
+          <label htmlFor="tags">Genre</label>
+          {genre.map(gen => (
+            <div key={gen._id} className="inline field">
+                <input
+                  id={`gen-${gen._id}`}
+                  type="radio"
+                  checked={this.state.genre === gen._id}
+                  onChange={this.handleRadio(gen)}
+                />
+              <label htmlFor={`gen-${gen._id}`}>{gen.name}</label>
+            </div>
+          ))}
+        </div>
+
         <button className="ui button" type="submit">
           Submit
         </button>
