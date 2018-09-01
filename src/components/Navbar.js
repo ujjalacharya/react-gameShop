@@ -2,10 +2,10 @@ import React from "react";
 
 const Navbar = (props) => {
   return (
-    <div class="ui secondary pointing menu">
-      <a class="item"><strong>Game Shop</strong></a>
-      <a class="item" onClick={props.handleOpenForm}>
-        <i class="plus square outline icon" /> Add New Game
+    <div className="ui secondary pointing menu">
+      <a className="item"><strong>Game Shop</strong></a>
+      <a className="item" onClick={props.handleOpenForm}>
+        <i className="plus square outline icon" /> Add New Game
       </a>
     </div>
   );

@@ -128,6 +128,7 @@ class GameForm extends React.Component {
             name="publisher"
             value={this.state.publisher}
             onChange={this.handleNumberChange}
+            className="ui simple fluid dropdown"
           >
             {this.props.publishers.map(publisher => (
               <option value={publisher._id} key={publisher._id}>
@@ -141,7 +142,7 @@ class GameForm extends React.Component {
         <button className="ui button primary" type="submit">
           Submit
         </button>
-        <div class="or" />
+        <div className="or" />
         <button onClick={this.props.handleCloseForm} className="ui button" type="submit">
           Cancel
         </button>
