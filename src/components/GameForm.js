@@ -36,12 +36,13 @@ class GameForm extends React.Component {
   };
 
   handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault(); 
     const errors = this.validate(this.state.data);
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
-      console.log(this.state.data);
+      this.props.createNewGame(this.state.data)
     }
+
   };
 
   validate = data => {
@@ -139,7 +140,7 @@ class GameForm extends React.Component {
               value={data.players}
               placeholder="Players..."
             />
-            {errors.players && <FormInlineErrorMessage error={errors.name} />}
+            {errors.players && <FormInlineErrorMessage error={errors.players} />}
           </div>
         </div>
 

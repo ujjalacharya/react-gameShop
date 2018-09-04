@@ -8,17 +8,17 @@ const GameCard = ({ game, handleFeaturedClick }) => {
     <Overdrive id={String(game.id)}>
       <div className="ui card" id="card">
         <div className="image">
-          <CardLabel label={game.label} />
+          <CardLabel label={game.price} />
           <Featured
             id={game.id}
             handleFeaturedClick={handleFeaturedClick}
             featured={game.featured}
           />
-          <img src={game.img} alt="Halo" />
+          <img src={game.thumbnail} alt="Halo" />
         </div>
         <div className="content">
           <a href="/" className="header">
-            {game.title}
+            {game.name}
           </a>
           <div className="meta">
             <i className="icon users" />
