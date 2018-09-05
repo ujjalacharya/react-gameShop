@@ -3,7 +3,7 @@ import CardLabel from "./CardLabel";
 import Featured from "./Featured";
 import Overdrive from "react-overdrive";
 
-const GameCard = ({ game, handleFeaturedClick }) => {
+const GameCard = ({ game, handleFeaturedClick, editGame }) => {
   return (
     <Overdrive id={String(game.id)}>
       <div className="ui card" id="card">
@@ -26,6 +26,8 @@ const GameCard = ({ game, handleFeaturedClick }) => {
             &nbsp;
             <i className="icon wait" /> {game.duration}
           </div>
+          <button className="ui inverted green button" onClick={editGame(game)}>Edit</button>
+          <button className="ui inverted red button">Delete</button>
         </div>
       </div>
     </Overdrive>

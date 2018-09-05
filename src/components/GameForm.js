@@ -45,6 +45,10 @@ class GameForm extends React.Component {
 
   };
 
+  componentDidMount(){
+    this.setState({data: this.props.gameToEdit})
+  }
+
   validate = data => {
     const errors = {};
     if (!data.name) errors.name = "This field can't be blank";
@@ -98,7 +102,11 @@ class GameForm extends React.Component {
 
         <div className={errors.thumbnail ? "error field" : "field"}>
           <label htmlFor="thumbnail">Image URL</label>
-          <input name="thumbnail" type="text" onChange={this.handleChange} />
+          <input
+          name="thumbnail"
+          type="text"
+          value={data.thumbnail}
+          onChange={this.handleChange} />
           {errors.thumbnail && (
             <FormInlineErrorMessage error={errors.thumbnail} />
           )}
@@ -123,7 +131,7 @@ class GameForm extends React.Component {
               onChange={this.handleNumberChange}
               type="number"
               name="duration"
-              value={data.duration}
+              value={data.duration.replace("mins", "")}
               placeholder="Duration..."
             />
             {errors.duration && (

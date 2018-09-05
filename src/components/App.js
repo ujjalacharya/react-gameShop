@@ -51,7 +51,8 @@ const games = [
 class App extends React.Component {
   state = {
     games: [],
-    isFormActive: false
+    isFormActive: false,
+    gameToEdit: {}
   };
 
   componentDidMount() {
@@ -82,6 +83,10 @@ class App extends React.Component {
     this.setState({ isFormActive: false });
   };
 
+  editGame = game => () =>{
+    this.setState({isFormActive: true, gameToEdit: game})
+  }
+
   createNewGame = data => {
     this.setState({
       games: this.sortGames([
@@ -96,7 +101,6 @@ class App extends React.Component {
   };
 
   render() {
-    console.log(this.state);
     let gameCardSize = this.state.isFormActive ? "ten" : "twelve";
     return (
       <div id="index">
@@ -108,6 +112,7 @@ class App extends React.Component {
                 publishers={publishers}
                 handleCloseForm={this.handleCloseForm}
                 createNewGame={this.createNewGame}
+                gameToEdit={this.state.gameToEdit}
               />
             </div>
           )}
@@ -115,6 +120,7 @@ class App extends React.Component {
             <GameList
               handleFeaturedClick={this.handleFeaturedClick}
               games={this.state.games}
+              editGame={this.editGame}
             />
           </div>
         </div>
