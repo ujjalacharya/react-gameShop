@@ -1,6 +1,6 @@
 import React from "react";
 import GameCard from "./GameCard";
-const GameList = ({ games, handleFeaturedClick, editGame }) => {
+const GameList = ({ games, handleFeaturedClick, editGame, deleteGame }) => {
   return (
     <div className="ui four cards" style={{ margin: "10px" }}>
       {games.length === 0 ? (
@@ -12,6 +12,7 @@ const GameList = ({ games, handleFeaturedClick, editGame }) => {
               game={game}
               handleFeaturedClick={handleFeaturedClick}
               editGame={editGame}
+              deleteGame={deleteGame}
             />
         ))
       )}

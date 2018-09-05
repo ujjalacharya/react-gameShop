@@ -109,6 +109,12 @@ class App extends React.Component {
     })
   }
 
+  deleteGame = data =>() =>{
+    this.setState({
+      games: this.state.games.filter(game=> game._id !== data._id)
+    })
+  }
+
   createNewGame = data => {
     this.setState({
       games: this.sortGames([
@@ -143,6 +149,7 @@ class App extends React.Component {
               handleFeaturedClick={this.handleFeaturedClick}
               games={this.state.games}
               editGame={this.editGame}
+              deleteGame={this.deleteGame}
             />
           </div>
         </div>
