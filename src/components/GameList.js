@@ -8,7 +8,7 @@ const GameList = ({ games, handleFeaturedClick, editGame }) => {
       ) : (
         games.map(game => (
             <GameCard
-              key={game.id}
+              key={game._id}
               game={game}
               handleFeaturedClick={handleFeaturedClick}
               editGame={editGame}

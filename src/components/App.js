@@ -14,7 +14,7 @@ const publishers = [
 
 const games = [
   {
-    id: 0,
+    _id: 1,
     price: 3299,
     featured: false,
     publisher: 1,
@@ -25,7 +25,7 @@ const games = [
     duration: "60mins"
   },
   {
-    id: 1,
+    _id: 2,
     price: 3097,
     featured: true,
     publisher: 2,
@@ -36,7 +36,7 @@ const games = [
     duration: "120mins"
   },
   {
-    id: 2,
+    _id: 3,
     price: 1797,
     featured: false,
     publisher: 1,
@@ -45,6 +45,17 @@ const games = [
     name: "Assasin's Creed",
     players: "1",
     duration: "30mins"
+  },
+  {
+    _id: 4,
+    price: 2016,
+    featured: false,
+    publisher: 2,
+    thumbnail:
+      "https://cdn.tutsplus.com/gamedev/authors/david-arcila/nintendohard_contra.jpg",
+    name: "Contra",
+    players: "2",
+    duration: "25mins"
   }
 ];
 
@@ -69,7 +80,7 @@ class App extends React.Component {
     return this.setState({
       games: this.sortGames(
         this.state.games.map(game => {
-          return game.id === id ? { ...game, featured: !game.featured } : game;
+          return game._id === id ? { ...game, featured: !game.featured } : game;
         })
       )
     });
@@ -85,6 +96,17 @@ class App extends React.Component {
 
   editGame = game => () =>{
     this.setState({isFormActive: true, gameToEdit: game})
+  }
+
+  saveGame = game =>{
+    game._id ? this.updateGame(game) : this.createNewGame(game)
+  } 
+
+  updateGame = data =>{
+    this.setState({
+      games: this.sortGames(this.state.games.map(game=> (game._id === data._id ? data : game))),
+      isFormActive: false
+    })
   }
 
   createNewGame = data => {
@@ -111,7 +133,7 @@ class App extends React.Component {
               <GameForm
                 publishers={publishers}
                 handleCloseForm={this.handleCloseForm}
-                createNewGame={this.createNewGame}
+                saveGame={this.saveGame}
                 gameToEdit={this.state.gameToEdit}
               />
             </div>

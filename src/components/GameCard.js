@@ -5,12 +5,12 @@ import Overdrive from "react-overdrive";
 
 const GameCard = ({ game, handleFeaturedClick, editGame }) => {
   return (
-    <Overdrive id={String(game.id)}>
+    <Overdrive id={String(game._id)}>
       <div className="ui card" id="card">
         <div className="image">
           <CardLabel label={game.price} />
           <Featured
-            id={game.id}
+            id={game._id}
             handleFeaturedClick={handleFeaturedClick}
             featured={game.featured}
           />
@@ -26,8 +26,17 @@ const GameCard = ({ game, handleFeaturedClick, editGame }) => {
             &nbsp;
             <i className="icon wait" /> {game.duration}
           </div>
-          <button className="ui inverted green button" onClick={editGame(game)}>Edit</button>
-          <button className="ui inverted red button">Delete</button>
+        </div>
+        <div className="extracontent">
+          <div className="ui two buttons">
+            <button
+              className="ui inverted green button"
+              onClick={editGame(game)}
+            >
+              Edit
+            </button>
+            <button className="ui inverted red button">Delete</button>
+          </div>
         </div>
       </div>
     </Overdrive>

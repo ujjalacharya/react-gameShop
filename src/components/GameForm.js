@@ -42,7 +42,7 @@ class GameForm extends React.Component {
     const errors = this.validate(this.state.data);
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
-      this.props.createNewGame(this.state.data)
+      this.props.saveGame(this.state.data)
     }
 
   };
@@ -52,10 +52,10 @@ class GameForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.gameToEdit.id && nextProps.gameToEdit.id !== this.state.data.id){
+    if(nextProps.gameToEdit._id && nextProps.gameToEdit._id !== this.state.data._id){
       this.setState({data: nextProps.gameToEdit})
   }
-  if(nextProps.gameToEdit.id === undefined){
+  if(nextProps.gameToEdit._id === undefined){
     this.setState({data: initialData})
   }
 }
@@ -142,7 +142,7 @@ class GameForm extends React.Component {
               onChange={this.handleNumberChange}
               type="number"
               name="duration"
-              value={data.duration && data.duration.replace("mins", "")}
+              value={data.duration}
               placeholder="Duration..."
             />
             {errors.duration && (
