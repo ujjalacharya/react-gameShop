@@ -2,18 +2,20 @@ import React from "react";
 import ReactImageFallback from "react-image-fallback";
 import FormInlineErrorMessage from "./FormInlineErrorMessage";
 
+const initialData ={
+    name: "",
+    description: "",
+    price: "",
+    duration: "",
+    players: "",
+    featured: false,
+    thumbnail: "",
+    publisher: 0
+}
+
 class GameForm extends React.Component {
   state = {
-    data: {
-      name: "",
-      description: "",
-      price: "",
-      duration: "",
-      players: "",
-      featured: false,
-      thumbnail: "",
-      publisher: 0
-    },
+    data: initialData,
     errors: {}
   };
 
@@ -48,6 +50,15 @@ class GameForm extends React.Component {
   componentDidMount(){
     this.setState({data: this.props.gameToEdit})
   }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.gameToEdit.id && nextProps.gameToEdit.id !== this.state.data.id){
+      this.setState({data: nextProps.gameToEdit})
+  }
+  if(nextProps.gameToEdit.id === undefined){
+    this.setState({data: initialData})
+  }
+}
 
   validate = data => {
     const errors = {};
@@ -131,7 +142,7 @@ class GameForm extends React.Component {
               onChange={this.handleNumberChange}
               type="number"
               name="duration"
-              value={data.duration.replace("mins", "")}
+              value={data.duration && data.duration.replace("mins", "")}
               placeholder="Duration..."
             />
             {errors.duration && (

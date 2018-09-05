@@ -76,11 +76,11 @@ class App extends React.Component {
   };
 
   handleOpenForm = () => {
-    this.setState({ isFormActive: true });
+    this.setState({ isFormActive: true, gameToEdit: {}});
   };
 
   handleCloseForm = () => {
-    this.setState({ isFormActive: false });
+    this.setState({ isFormActive: false , gameToEdit: {}});
   };
 
   editGame = game => () =>{
